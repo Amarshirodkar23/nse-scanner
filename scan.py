@@ -180,7 +180,7 @@ def render_html(rows: list[dict], universe_size: int, matched_before_top: int) -
 <title>Weekly NSE Bullish Shortlist</title>
 <style>
   body{{font-family:'Helvetica Neue',Arial,sans-serif;background:linear-gradient(120deg,#eef3ea,#f6efe4);
-       margin:0;padding:28px 24px 60px;color:#12140f;}}
+       margin:0 auto;max-width:900px;padding:28px 24px 60px;color:#12140f;}}
   .eyebrow{{font-size:12px;font-weight:700;letter-spacing:.08em;color:#0f5c37;text-transform:uppercase;margin:0 0 8px;}}
   h1{{font-size:38px;font-weight:800;margin:0 0 6px;letter-spacing:-0.02em;}}
   .sub{{color:#5c6255;font-size:14px;margin:0 0 20px;}}
