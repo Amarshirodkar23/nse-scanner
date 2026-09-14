@@ -1,0 +1,33 @@
+name: Weekly NSE bullish scan
+
+on:
+  schedule:
+    - cron: "30 2 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run weekly scan
+        run: python scan.py
+
+      - name: Publish results
+        run: |
+          git config user.name "nse-scanner-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add docs data
+          git diff --quiet --cached || git commit -m "Weekly scan: $(date -u +%Y-%m-%d)"
+          git push
