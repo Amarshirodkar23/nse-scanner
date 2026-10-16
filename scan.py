@@ -20,6 +20,7 @@ import pandas as pd
 import yfinance as yf
 
 # ---------------------------------------------------------------- config --
+MIN_PRICE = 50         # rupees
 MAX_PRICE = 500        # rupees
 MIN_STREAK = 2          # minimum consecutive bullish days to qualify
 TOP_N = 20
@@ -119,7 +120,7 @@ def analyze(symbol: str, df: pd.DataFrame) -> dict | None:
     vols = df["Volume"].tolist()
 
     price = closes[-1]
-    if price > MAX_PRICE:
+        if price < MIN_PRICE or price > MAX_PRICE:
         return None
 
     # consecutive up-days counting back from the latest session
@@ -199,7 +200,7 @@ def render_html(rows: list[dict], universe_size: int, matched_before_top: int) -
 </style></head>
 <body>
   <p class="eyebrow">Weekly NSE momentum scan &middot; generated {generated}</p>
-  <h1>Top {len(rows)} bullish picks under &#8377;{MAX_PRICE}</h1>
+  <h1>Top {len(rows)} bullish picks &#8377;{MIN_PRICE} to &#8377;{MAX_PRICE}</h1>
   <p class="sub">Scanned {universe_size} NSE stocks &middot; {matched_before_top} matched the streak &amp; price filters before ranking &middot; circuit-staircase names removed automatically.</p>
   <table>
     <thead><tr><th>Rank</th><th>Stock</th><th class="num">Price</th><th>Streak</th>
