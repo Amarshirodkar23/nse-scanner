@@ -120,7 +120,7 @@ def analyze(symbol: str, df: pd.DataFrame) -> dict | None:
     vols = df["Volume"].tolist()
 
     price = closes[-1]
-        if price < MIN_PRICE or price > MAX_PRICE:
+    if price < MIN_PRICE or price > MAX_PRICE:
         return None
 
     # consecutive up-days counting back from the latest session
